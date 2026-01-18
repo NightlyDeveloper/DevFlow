@@ -1,9 +1,10 @@
+import { UserRound } from 'lucide-react';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const location = useLocation();
-
+  const token = localStorage.getItem('token');
   return (
     <div className="navbar bg-base-100 shadow-lg px-4 sm:px-8">
       <div className="navbar-start">
@@ -21,12 +22,17 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end gap-2">
+        {token ? <UserRound /> : 
+        <>
         <Link to="/login" className="btn btn-ghost btn-sm">
           Login
         </Link>
         <Link to="/register" className="btn btn-primary btn-sm">
           Get Started
-        </Link>
+        </Link> 
+        </>
+        }
+        
       </div>
     </div>
   );
