@@ -1,13 +1,14 @@
 import React from 'react';
-import { useAuth } from '../context/AuthContext'; // That's all we need!
+import { useAuth } from '../context/AuthContext'; 
 import ActivityLog from '../components/ActivityLog';
+import { Copy } from 'lucide-react';
+import CopyToken from '../components/CopyToken';
 
 const Dashboard = () => {
-  const { user, logout } = useAuth(); // Grab user data directly
+  const { user, logout } = useAuth(); 
 
   return (
     <div className="min-h-screen bg-base-200 p-8">
-      {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-primary">DevFlow Dashboard</h1>
@@ -20,10 +21,9 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Grid */}
+    
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* Profile Card */}
         <div className="card bg-base-100 shadow-xl border-l-4 border-primary">
           <div className="card-body">
             <h2 className="card-title">My Profile</h2>
@@ -37,8 +37,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Extension Instructions */}
-        <div className="card bg-base-100 shadow-xl md:col-span-2 border-l-4 border-accent">
+        {/* <div className="card bg-base-100 shadow-xl md:col-span-2 border-l-4 border-accent">
           <div className="card-body">
             <h2 className="card-title">🔌 Connect VS Code</h2>
             <p>Copy your unique ID below to connect your editor:</p>
@@ -46,7 +45,8 @@ const Dashboard = () => {
               <pre data-prefix=">"><code>User ID: {user?._id}</code></pre> 
             </div>
           </div>
-        </div>
+        </div> */}
+        <CopyToken />
 
       </div>
       <ActivityLog />

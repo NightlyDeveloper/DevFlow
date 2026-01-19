@@ -22,6 +22,10 @@
       {
         "command": "devflow-tracker.forceSave",
         "title": "DevFlow: Force Save"
+      },
+      {
+        "command": "devflow-tracker.login",
+        "title": "DevFlow: Login"
       }
     ]
   },

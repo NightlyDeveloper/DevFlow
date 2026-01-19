@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import StatsOverview from './StatsOverview';
 
 const ActivityLog = () => {
   const [activities, setActivities] = useState([]);
@@ -27,6 +28,9 @@ const ActivityLog = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+
+        <StatsOverview activities={activities} />
+
       <h2 className="text-xl font-bold mb-4">🧩 Recent DevFlow Activity</h2>
       {activities.length === 0 ? (
         <p className="text-gray-500">No coding sessions recorded yet. Start coding!</p>
