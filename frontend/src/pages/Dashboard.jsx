@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext'; // That's all we need!
+import ActivityLog from '../components/ActivityLog';
 
 const Dashboard = () => {
   const { user, logout } = useAuth(); // Grab user data directly
@@ -48,6 +49,7 @@ const Dashboard = () => {
         </div>
 
       </div>
+      <ActivityLog />
     </div>
   );
 };

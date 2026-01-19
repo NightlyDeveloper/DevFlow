@@ -5,7 +5,6 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import NavBar from './components/NavBar'
 import Landing from './pages/Landing'
-import ProtectedRoute from './components/ProtectedRoute'
 import { useAuth } from './context/AuthContext'
 
 const App = () => {
