@@ -1,0 +1,44 @@
+{
+  "name": "devflow-tracker",
+  "displayName": "DevFlow Tracker",
+  "description": "Tracker for VSCode activity",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "1.107.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devflow-tracker.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "devflow-tracker.forceSave",
+        "title": "DevFlow: Force Save"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.108.1",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.2"
+  },
+  "dependencies": {
+    "vscode": "^1.1.37"
+  }
+}

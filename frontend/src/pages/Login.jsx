@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 import api from '../lib/axios';
 import { toast } from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   // State to hold input values
@@ -10,6 +11,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -29,12 +31,13 @@ const Login = () => {
             email: formData.email,
             password: formData.password
         })
-        localStorage.setItem('token', res.data.token);
+        login(res.data.token);
         toast.success('Login successful')
         console.log(res.data);
         navigate('/dashboard');
     }catch(error){
-        toast.error("Error logging in: ", error.response.data.message);
+        console.log(error);
+        toast.error("Error logging in");
     }
   };
 
