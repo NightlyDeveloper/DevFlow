@@ -2,6 +2,7 @@ import User from "../models/User.js"
 import Team from "../models/Team.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import axios from "axios"
 
 export const registerUser = async (req, res) => {
     const { name, email, password, team:teamName } = req.body;
@@ -83,6 +84,38 @@ export const loginUser = async(req, res) => {
         })
     }catch(error){
         console.log("Error logging in: ", error)
-        return res.status(500).json({message: "Server error"})
+        return res.status(500).json({message: "Server error"+error})
+    }
+}
+
+export const connectGithub = async (req, res)=> {
+    const { code } = req.body;
+
+    try{
+        const tokenResponse = await axios.post('https://github.com/login/oauth/access_token', {
+            client_id: process.env.GITHUB_CLIENT_ID,
+            client_secret: process.env.GITHUB_CLIENT_SECRET,
+            code
+        }, {
+            headers: {Accept: 'application/json'}
+        })
+
+        const accessToken = tokenResponse.data.access_token;
+        console.log(accessToken);
+        if(!accessToken) return res.status(400).json({message: "Github login failed"});
+
+        const userRes = await axios.get('https://api.github.com/user', {
+            headers: {Authorization: `Bearer ${accessToken}`}
+        })
+
+        const user= await User.findOne({ _id: req.user.id });
+        user.githubAccessToken = accessToken;
+        user.githubUsername = userRes.data.login;
+        await user.save();
+
+        res.json(user);
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message: `Server error`});
     }
 }

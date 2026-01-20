@@ -24,6 +24,14 @@ const UserSchema = new mongoose.Schema({
         enum: ["admin", "developer"],
         default: "developer"
     },
+    githubAccessToken: {
+        type: String,
+        default: null
+    },
+    githubUsername: {
+        type: String,
+        default: null
+    }
 }, {
     timestamps: true
 });

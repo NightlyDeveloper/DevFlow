@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import ActivityLog from '../components/ActivityLog';
 import { Copy } from 'lucide-react';
 import CopyToken from '../components/CopyToken';
+import GithubIntegration from '../components/GithubIntegration';
+import GithubDashboard from '../components/GithubDashboard';
 
 const Dashboard = () => {
-  const { user, logout } = useAuth(); 
+  const { user, logout, team } = useAuth();
+  const [githubData, setGithubData] = useState(null);
+
+  const handleDataLoaded = (data)=>{
+    if(!githubData)
+      setGithubData(data);
+  }
 
   return (
     <div className="min-h-screen bg-base-200 p-8">
@@ -31,25 +39,19 @@ const Dashboard = () => {
             <p><span className="font-bold">ID:</span> <span className="text-xs font-mono bg-base-200 p-1 rounded">{user?._id}</span></p>
             <div className="mt-4">
               <span className="badge badge-lg badge-secondary badge-outline p-4">
-                 Team: {user?.team || "Solo"}
+                 Team: {team?.name || "Solo"}
               </span>
             </div>
           </div>
         </div>
-
-        {/* <div className="card bg-base-100 shadow-xl md:col-span-2 border-l-4 border-accent">
-          <div className="card-body">
-            <h2 className="card-title">🔌 Connect VS Code</h2>
-            <p>Copy your unique ID below to connect your editor:</p>
-            <div className="mockup-code mt-2 bg-neutral text-neutral-content">
-              <pre data-prefix=">"><code>User ID: {user?._id}</code></pre> 
-            </div>
-          </div>
-        </div> */}
+        
         <CopyToken />
+
+        <GithubIntegration onDataLoaded={handleDataLoaded} />
 
       </div>
       <ActivityLog />
+      { githubData && <GithubDashboard repos={githubData.repos} commits={githubData.commits} />}
     </div>
   );
 };

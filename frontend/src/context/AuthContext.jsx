@@ -7,6 +7,7 @@ export const AuthProvider = ({children})=>{
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
+    const [team, setTeam] = useState(null);
 
     useEffect(()=>{
         
@@ -14,8 +15,9 @@ export const AuthProvider = ({children})=>{
             if(token){
                 api.defaults.headers.common['x-auth-token'] = token;
                 try{
-                    const res = await api.get('/auth/me');
-                    setUser(res.data);
+                    const res = await api.get('/auth/');
+                    setUser(res.data.user);
+                    setTeam(res.data.team);
                 }catch(error){
                     console.log("Auth check failed: ", error);
                     logout();
@@ -39,7 +41,7 @@ export const AuthProvider = ({children})=>{
     }
 
     return (
-        <AuthContext.Provider value={{user, login, logout, loading, isAuthenticated: !!user}} >
+        <AuthContext.Provider value={{user, team, login, logout, loading, isAuthenticated: !!user}} >
             {!loading && children}
         </AuthContext.Provider>
     )

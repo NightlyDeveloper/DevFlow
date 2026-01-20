@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import NavBar from './components/NavBar'
 import Landing from './pages/Landing'
 import { useAuth } from './context/AuthContext'
+import GithubCallback from './pages/GithubCallback'
 
 const App = () => {
 
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path='/dashboard' element={isAuthenticated? <Dashboard /> : <Landing />} />
+        <Route path='/github-callback' element={<GithubCallback />} />
       </Routes>
     </>
   )

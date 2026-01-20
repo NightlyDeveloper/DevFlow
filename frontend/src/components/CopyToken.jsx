@@ -11,7 +11,7 @@ const CopyToken = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white p-6 rounded-lg shadow-md mt-6">
+    <div className="bg-gray-800 text-white p-6 rounded-lg shadow-md h-full">
       <h3 className="text-xl font-bold mb-2">🔑 Connect VS Code</h3>
       <p className="text-gray-400 mb-4 text-sm">
         To track your coding hours, you need to connect the extension.
